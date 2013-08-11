@@ -28,13 +28,7 @@ read -p "Press any key to continue..."
 
 aptitude -y install redmine=2.3.1-1 ruby ruby-dev rails rake libtalloc2=2.0.8-0.1 ruby-pg redmine-pgsql=2.3.1-1 ruby-rmagick gem make postgresql-9.1 postgresql-client-9.1 equivs
 
-cd /usr/share/redmine
-cat > Gemfile.local << "EOF"
-gem "rack", "~> 1.4.5"
-gem "unicorn"
-EOF
-
-bundle install
+gem install unicorn
 
 echo "=============================="
 echo "Create directories"
@@ -160,6 +154,13 @@ echo "=============================="
 echo "Fix Rack"
 echo "=============================="
 read -p "Press any key to continue..."
+
+cd /usr/share/redmine
+cat > Gemfile.local << "EOF"
+gem "rack", "~> 1.4.5"
+EOF
+
+bundle install
 
 cd /usr/bin
 equivs-control ruby-rack
